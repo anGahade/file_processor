@@ -1,19 +1,16 @@
 """
-Напишіть програму, яка читає вміст текстового файлу
-та виводить кількість слів у ньому.
+Створіть функцію, яка приймає рядок від користувача та записує його у файл.
 """
 
 
-def read_line():
-    file = open("test.txt", "r")
-    content = file.read()
-    words = content.split()
-    count = len(words)
-    file.close()
-    return (
-        f"Вміст файлу: \n{content}"
-        f"\nФайл містить {count} слів"
-    )
+def add_line():
+    with open("test.txt", "r+") as file:
+        file.write(input("Введіть нові дані: "))
+        file.seek(0)
+        content = file.read()
+
+    return f"Новий вміст файлу:\n{content}"
 
 
-print(read_line())
+print(add_line())
+
