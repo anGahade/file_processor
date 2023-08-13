@@ -1,16 +1,17 @@
 """
-Створіть функцію, яка приймає рядок від користувача та записує його у файл.
+Реалізуйте програму, яка копіює вміст одного файлу в інший.
 """
+source_file = 'test.txt'
+dest_file = 'test_2.txt'
 
 
-def add_line():
-    with open("test.txt", "r+") as file:
-        file.write(input("Введіть нові дані: "))
-        file.seek(0)
-        content = file.read()
-
-    return f"Новий вміст файлу:\n{content}"
+def copy_file():
+    with open(source_file, 'r') as src:
+        with open(dest_file, 'w') as dst:
+            dst.write(src.read())
 
 
-print(add_line())
+copy_file()
+
+print('Файл успішно скопійовано!')
 
