@@ -1,22 +1,25 @@
 """
-Напишіть програму, яка відкриває два файли для читання та порівнює їх вміст,
-виводячи рядки, які є у першому файлі, але відсутні у другому.
+Створіть функцію, яка видаляє вказаний рядок з текстового файлу.
 """
 
 
-def compare_files(file1_path, file2_path):
+def remove_line_from_file(file_path, line_to_remove):
     try:
-        with open(file1_path, 'r', encoding='utf-8') as file1, open(file2_path, 'r', encoding='utf-8') as file2:
-            lines_file1 = set(file1.readlines())
-            lines_file2 = set(file2.readlines())
+        with open(file_path, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
 
-            missing_lines = lines_file1 - lines_file2
+        with open(file_path, 'w', encoding='utf-8') as file:
+            for line in lines:
+                if line.strip() != line_to_remove.strip():
+                    file.write(line)
 
-            print("Рядки, які є у першому файлі, але відсутні у другому:")
-            for line in missing_lines:
-                print(line.strip())
+        print(f"Рядок '{line_to_remove}' був видалений з файлу '{file_path}'.")
     except FileNotFoundError:
-        print("Один з файлів не знайдено.")
+        print("Файл не знайдено.")
+    except Exception as e:
+        print(f"Сталася помилка: {e}")
 
 
-compare_files('test.txt', 'test_2.txt')
+
+remove_line_from_file('test.txt', 'такі самотні-самотні.')
+
